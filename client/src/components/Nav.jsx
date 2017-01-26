@@ -9,3 +9,4 @@ var Nav = ({handleSearchInputChange}) => (
 );
 
 window.Nav = Nav;
+// export {Nav};
