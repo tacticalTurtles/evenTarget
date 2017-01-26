@@ -18,3 +18,4 @@ EventList.propTypes = {
 };
 
 window.EventList = EventList;
+// export {EventList};

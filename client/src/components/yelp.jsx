@@ -19,3 +19,4 @@ yelp.search({ term: 'food', location: 'Montreal' })
 
 //exports the yelp class
 window.yelp = yelp;
+// export {yelp};

@@ -25,3 +25,4 @@ EventEntry.propTypes = {
 };
 
 window.EventEntry = EventEntry;
+// export {EventEntry};
