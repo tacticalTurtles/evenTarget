@@ -6,8 +6,8 @@
   "repository": "https://github.com/andrewregal/hrsf52-greenfield",
   "license": "ISC",
   "scripts": {
+    "start:dev": "nodemon ./bin/www",
     "start": "npm run build",
-    "build": "webpack -d && cp client/index.html && webpack-dev-server --content-base client/src --inline --hot",
     "build-prod": "webpack -p && cp client/src/index.html client/dist/index.html"
   },
   "dependencies": {
@@ -20,7 +20,9 @@
     "express-session": "*",
     "jade": "*",
     "jquery": "*",
-    "pg": "*",
+    "morgan": "*",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
     "pg-query": "*",
     "react": "*",
     "react-bootstrap": "*",
@@ -29,6 +31,7 @@
     "redis": "*",
     "request": "*",
     "request-promise": "*",
+    "sequelize": "^3.30.0",
     "yelp": "*"
   },
   "devDependencies": {
@@ -36,8 +39,8 @@
     "babel-core": "*",
     "babel-eslint": "*",
     "babel-loader": "*",
-    "babel-preset-react": "*",
     "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
     "babel-preset-stage-2": "*",
     "babel-watch": "*",
     "browser-sync": "*",
@@ -48,7 +51,9 @@
     "gulp": "*",
     "mocha": "*",
     "mocha-traceur": "*",
+    "nodemon": "^1.11.0",
     "react-tools": "*",
+    "sequelize-cli": "^2.5.1",
     "sinon": "*",
     "webpack": "*",
     "webpack-dev-server": "*"
