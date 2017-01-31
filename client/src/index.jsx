@@ -18,7 +18,6 @@ class App extends React.Component {
   componentWillMount() {
   	//sets the current events in the state array to the data we aquire (x10)
     this.state.events = eventData;
-    console.log(eventData);
   	// yelp.search({ term: 'food', location: 'Montreal' })
   	// .then(function (data) {
   	//   this.state.events = data;
@@ -36,7 +35,17 @@ class App extends React.Component {
   }
 
   getEvents(query) {
-
+    console.log(query);
+    fetch('/data', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      url: query
+    }).then( (data) => data.json() ).then( (responseJson) => {
+      console.log(responseJson);
+    })
   }
 
   //the render function which will be ran when something in the state is changed

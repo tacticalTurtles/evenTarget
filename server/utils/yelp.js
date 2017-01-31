@@ -17,3 +17,5 @@ yelp.search({ term: 'food', location: 'Montreal' })
 .catch(function (err) {
   console.error(err);
 });
+
+module.exports = yelp;

@@ -10,6 +10,7 @@
     "dev-react": "webpack -d --watch"
   },
   "dependencies": {
+    "babel": "^6.5.2",
     "bluebird": "*",
     "body-parser": "*",
     "bootstrap": "*",
