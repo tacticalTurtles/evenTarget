@@ -33,5 +33,6 @@ class Search extends React.Component {
   }
 };
 
-window.Search = Search;
+export default Search;
+// window.Search = Search;
 // export {Search};
