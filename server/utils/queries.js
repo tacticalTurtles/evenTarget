@@ -23,3 +23,18 @@ exports.insertData = function (event, cb) {
     cb(data);
   });
 };
+
+// var test = {
+//   name: 'test',
+//   description: 'test',
+//   locaton: 'test',
+//   image: 'test'
+// };
+
+// insertData(test, function(err, data) {
+//   if (err) {
+//     throw err;
+//   }
+
+//   console.log('test worked');
+// });
