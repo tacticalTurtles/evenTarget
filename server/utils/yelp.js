@@ -1,4 +1,5 @@
 var Yelp = require('yelp');
+var helpers = require('./queries.js');
 
 //create a new yelp class
 var yelp = new Yelp({
