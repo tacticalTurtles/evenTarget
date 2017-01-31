@@ -1,4 +1,6 @@
-var EventEntry = ({event, handleEventClick}) => (
+var EventEntry = ({event, handleEventClick}) => {
+  console.log('events', event);
+  return (
   <div className="event-entry">
     <div className="media-left media-middle">
       <img className="media-object" src={event.snippet_image_url} alt="" />
@@ -14,15 +16,16 @@ var EventEntry = ({event, handleEventClick}) => (
       </div>
       <div className="event-entry-detail">{event.snippet_text}</div>
     </div>
-    <div className='event-entry-location'> {`${event.location.address[0]} ${event.location.city} 
+    <div className='event-entry-location'> {`${event.location.address1} ${event.location.city} 
     ${event.location.state_code}, ${event.location.postal_code}` }
     </div>
   </div>
-);
+)};
 
 EventEntry.propTypes = {
-  video: React.PropTypes.object.isRequired
+  event: React.PropTypes.object.isRequired
 };
 
-window.EventEntry = EventEntry;
+export default EventEntry;
+// window.EventEntry = EventEntry;
 // export {EventEntry};
