@@ -1,8 +1,6 @@
 var Yelp = require('yelp');
 var helpers = require('./queries.js');
 
-helpers.get
-
 //create a new yelp class
 var yelp = new Yelp({
   consumer_key: 'KoJawYiTg_ufBHXdWiNPTw',

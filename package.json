@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "FARJ",
-  "repository": "https://github.com/andrewregal/hrsf52-greenfield",
+  "repository": "https://github.com/tacticalTurtles/evenTarget",
   "license": "ISC",
   "scripts": {
     "start": "nodemon server/server.js",
