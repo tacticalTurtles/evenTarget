@@ -18,5 +18,5 @@ yelp.search({ term: 'food', location: 'Montreal' })
 });
 
 //exports the yelp class
-window.yelp = yelp;
+module.exports = yelp;
 // export {yelp};

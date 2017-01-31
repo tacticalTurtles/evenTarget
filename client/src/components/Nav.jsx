@@ -1,4 +1,4 @@
-// import Search from 'Search';
+import Search from './Search.jsx';
 
 var Nav = ({handleSearchInputChange}) => (
   <nav className="navbar">
@@ -8,5 +8,6 @@ var Nav = ({handleSearchInputChange}) => (
   </nav>
 );
 
-window.Nav = Nav;
+export default Nav;
+// window.Nav = Nav;
 // export {Nav};

@@ -1,4 +1,4 @@
-window.eventData = [
+var eventData = [
 {
   "total": 8228,
   "businesses": [
@@ -215,3 +215,5 @@ window.eventData = [
   }
 }
 ]
+
+export default eventData;
