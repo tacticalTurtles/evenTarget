@@ -1,4 +1,5 @@
 var helper = require('../utils/queries.js');
+var yelp = require('../utils/yelp.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -10,9 +11,10 @@ app.use(express.static(__dirname + '/../../client/dist'));
 
 
 app.get('/data', function (req, res, next) {
-  helper.getData(function (data) {
-    res.send(data);
-  });
+  // helper.getData(function (data) {
+  //   res.send(data);
+  // });
+  res.send(req);
 });
 
 app.post('/data', function (req, res, next) {
