@@ -1,6 +1,7 @@
 import Nav from './Nav.jsx';
 import Search from './Search.jsx';
 import EventList from './EventList.jsx';
+import CurrentEvent from './CurrentEvent.jsx'
 // import eventData from '../data/data.js'; //remove later
 import React from 'react';
 import $ from 'jquery';
@@ -22,7 +23,8 @@ class App extends React.Component {
 
   //changes this event to the clicked event when a file is clicked
   handleEventClick(event) {
-    this.state({
+    this.setState({
+      events: [],
       currentEvent: event
     });
   }
@@ -48,8 +50,7 @@ class App extends React.Component {
         this.setState({
           'events': data
         })
-      })
-
+      });
   }
 
   render() {
@@ -59,7 +60,8 @@ class App extends React.Component {
         <div className="col-md-6">
           <Nav />
           <Search getEvents={this.getEvents.bind(this)} />
-          <EventList events={this.state.events} handleEventClick={this.handleEventClick} />
+          <EventList events={this.state.events} handleEventClick={this.handleEventClick.bind(this)} />
+          <CurrentEvent event={this.state.currentEvent} />
         </div>
       </div>
     );
