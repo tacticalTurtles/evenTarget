@@ -20,16 +20,15 @@ class Search extends React.Component {
   }
 
   handleOnClick(e) {
-    console.log(this.state.searchValue);
-    // e.preventDefault();
     this.props.getEvents(this.state.searchValue);
+    e.preventDefault();
     return false;
   }
 
   render() {
     return (
       <div className="search-bar form-inline">
-        <form>
+        <form onSubmit={this.handleOnClick.bind(this)}>
           <input
             className="form-control"
             type="text"
@@ -41,7 +40,7 @@ class Search extends React.Component {
             type="button"
             onClick={this.handleOnClick.bind(this)}
             > search this bitch 
-            </button>
+          </button>
         </form>
       </div>
     );
