@@ -29,7 +29,7 @@ class CurrentEvent extends React.Component {
 
     fetch('/postComment', options)
       .then((resp) => {
-        console.log('posted that bitch up')
+        console.log('posted')
       });
     this.setState({
       comment: ''
