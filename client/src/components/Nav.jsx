@@ -1,9 +1,7 @@
-import Search from './Search.jsx';
-
-var Nav = ({handleSearchInputChange}) => (
+var Nav = () => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">
-      <Search handleSearchInputChange={handleSearchInputChange}/>
+      Home Logout
     </div>
   </nav>
 );

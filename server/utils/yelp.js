@@ -10,12 +10,12 @@ var yelp = new Yelp({
 });
 
 //testing to see if the call will work
-yelp.search({ term: 'food', location: 'Montreal' })
-.then(function (data) {
-  console.log(data);
-})
-.catch(function (err) {
-  console.error(err);
-});
+// yelp.search({ term: 'food', location: 'Montreal' })
+// .then(function (data) {
+//   console.log(data);
+// })
+// .catch(function (err) {
+//   console.error(err);
+// });
 
 module.exports = yelp;

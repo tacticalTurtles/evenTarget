@@ -8,12 +8,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../../client/dist'));
 
-
-
 app.get('/data', function (req, res, next) {
   // helper.getData(function (data) {
   //   res.send(data);
   // });
+
+  yelp.search({ term: req.url, location: 'Boston' })
+  .then(function (data) {
+    console.log(req);
+  
+    // console.log(data);
+    res.send(req);
+  })
+  .catch(function (err) {
+    console.error(err);
+  });
+
   res.send(req);
 });
 
