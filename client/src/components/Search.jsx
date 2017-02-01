@@ -9,28 +9,40 @@ class Search extends React.Component {
     };
   }
 
+
   //anytime the value of the search bar changes, we change the state.value to the bar
   //and call the handleSearchInputChange with the value as the parameter
   handleInputChange(e) {
-    this.props.getEvents(e.target.value);
+    // this.props.getEvents(e.target.value);
     this.setState({
       searchValue: e.target.value
     });
   }
 
+  handleOnClick(e) {
+    console.log(this.state.searchValue);
+    // e.preventDefault();
+    this.props.getEvents(this.state.searchValue);
+    return false;
+  }
+
   render() {
     return (
       <div className="search-bar form-inline">
-        <input
-          className="form-control"
-          type="text"
-          value={this.state.searchValue}
-          placeholder="find your target"
-          onChange={this.handleInputChange.bind(this)}
-        />
-        <button className="btn hidden-sm-down">
-          <span className="glyphicon glyphicon-search"></span>
-        </button>
+        <form>
+          <input
+            className="form-control"
+            type="text"
+            value={this.state.searchValue}
+            placeholder="find your target"
+            onChange={this.handleInputChange.bind(this)}
+          />
+          <button
+            type="button"
+            onClick={this.handleOnClick.bind(this)}
+            > search this bitch 
+            </button>
+        </form>
       </div>
     );
   }

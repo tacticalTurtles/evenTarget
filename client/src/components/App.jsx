@@ -28,23 +28,27 @@ class App extends React.Component {
   }
 
   getEvents(query) {
-
-    $.get('/getData', {
+    var options = {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-    }).done((data) => {
-      console.log(data);
-      this.setState({
-        events: data
-      });
-    })
-    .fail(({responseJSON}) => {
-      responseJSON.error.errors.forEach((err) =>
-        console.error(err)
-      );
-    });
+      body: JSON.stringify({
+        term: query,
+        location: 'San Francisco'
+      })
+    };
+
+    fetch('/getData', options)
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        this.setState({
+          'events': data
+        })
+      })
 
   }
 
