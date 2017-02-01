@@ -3,16 +3,16 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      value: ''
+      searchValue: ''
     };
   }
 
   //anytime the value of the search bar changes, we change the state.value to the bar
   //and call the handleSearchInputChange with the value as the parameter
   handleInputChange(e) {
-    this.props.handleSearchInputChange(e.target.value);
+    this.props.getEvents(e.target.value);
     this.setState({
-      value: e.target.value
+      searchValue: e.target.value
     });
   }
 
@@ -22,7 +22,8 @@ class Search extends React.Component {
         <input
           className="form-control"
           type="text"
-          value={this.state.value}
+          value={this.state.searchValue}
+          placeholder="find your target"
           onChange={this.handleInputChange.bind(this)}
         />
         <button className="btn hidden-sm-down">
@@ -31,7 +32,7 @@ class Search extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default Search;
 // window.Search = Search;
