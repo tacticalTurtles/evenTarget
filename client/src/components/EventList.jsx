@@ -6,7 +6,7 @@ var EventList = ({events, handleEventClick}) => {
     <div className="event-list media">
       {events.map( (event) => {
         return (
-          <EventEntry event={event.businesses[0]} handleEventClick={handleEventClick} />);
+          <EventEntry event={event} handleEventClick={handleEventClick} />);
       })}
     </div>
   );
