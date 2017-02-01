@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS events;
 
 CREATE TABLE events (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(50) NOT NULL ,
-  location VARCHAR(255) NOT NULL,
-  description VARCHAR(255),
-  url VARCHAR(255),
-  image VARCHAR(255)
+  name VARCHAR(255) NOT NULL UNIQUE,
+  location TEXT NOT NULL,
+  description TEXT,
+  url TEXT,
+  image TEXT
 )
 
 -- location: 944 Market Street San Francisco, CA 94121
