@@ -1,3 +1,4 @@
+import React from 'react';
 import EventEntry from './EventEntry.jsx';
 
 var EventList = ({events, handleEventClick}) => {

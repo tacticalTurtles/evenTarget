@@ -2,6 +2,7 @@ import Nav from './Nav.jsx';
 import Search from './Search.jsx';
 import EventList from './EventList.jsx';
 import eventData from '../data/data.js'; //remove later
+import React from 'react';
 
 class App extends React.Component {
   constructor(props) {

@@ -1,3 +1,5 @@
+import React from 'react';
+
 var Nav = () => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">

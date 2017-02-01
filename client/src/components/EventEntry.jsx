@@ -1,3 +1,5 @@
+import React from 'react';
+
 var EventEntry = ({event, handleEventClick}) => {
   return (
     <div className="event-entry">
