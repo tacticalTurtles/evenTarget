@@ -7,8 +7,7 @@ var getEventbriteData = function() {
 			Authorization: 'Bearer BRWUISPFFOSVMZBAS2WW'
 		},
 		data: {
-			q: 'party',
-			sort_by: 'date'
+			q: 'san francisco',
 		}
 	};
 
@@ -17,7 +16,8 @@ var getEventbriteData = function() {
 			return resp.json();
 		})
 		.then( (data) => {
-			console.log(Object.keys(data.events[0]));
+			console.log(Object.keys(data.events));
+			console.log(data.events[0].locale);
 			console.log('name', data.events[0].name.text)
 			console.log('description', data.events[0].description.text)
 			console.log('locale', data.events[0].locale)
