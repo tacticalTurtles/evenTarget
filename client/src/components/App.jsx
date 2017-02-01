@@ -1,8 +1,9 @@
 import Nav from './Nav.jsx';
 import Search from './Search.jsx';
 import EventList from './EventList.jsx';
-import eventData from '../data/data.js'; //remove later
+// import eventData from '../data/data.js'; //remove later
 import React from 'react';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends React.Component {
 
   componentWillMount() {
 	//sets the current events in the state array to the data we aquire (x10)
-    this.state.events = eventData;
+    // this.state.events = eventData;
   }
 
   //changes this event to the clicked event when a file is clicked
@@ -27,16 +28,24 @@ class App extends React.Component {
   }
 
   getEvents(query) {
-    fetch('/data', {
-      method: 'GET',
+
+    $.get('/getData', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      url: query
-    }).then( (data) => data.json() ).then( (responseJson) => {
-      console.log(responseJson);
+    }).done((data) => {
+      console.log(data);
+      this.setState({
+        events: data
+      });
+    })
+    .fail(({responseJSON}) => {
+      responseJSON.error.errors.forEach((err) =>
+        console.error(err)
+      );
     });
+
   }
 
   render() {
