@@ -93,8 +93,5 @@ class CurrentEvent extends React.Component {
     }
   }
 };
-// CurrentEvent.propTypes = {
-//   event: React.PropTypes.object.isRequired
-// };
 
 export default CurrentEvent;
