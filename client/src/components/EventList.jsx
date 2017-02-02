@@ -1,12 +1,17 @@
 import React from 'react';
 import EventEntry from './EventEntry.jsx';
 
-var EventList = ({events, handleEventClick}) => {
+var EventList = ({events, handleEventClick, addToBookmarks}) => {
   return (
     <div className="event-list media">
       {events.map( (event) => {
         return (
-          <EventEntry event={event} handleEventClick={handleEventClick} />);
+          <EventEntry
+            event={event}
+            handleEventClick={handleEventClick}
+            addToBookmarks={addToBookmarks}
+          />
+        );
       })}
     </div>
   );
