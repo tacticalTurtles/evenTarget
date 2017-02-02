@@ -42,14 +42,14 @@ class CurrentEvent extends React.Component {
     var desc = '';
     if(this.props.event) {
 
-      for (let category of this.props.event.categories) {
-        desc += category[0] + ' ';
-      }
+      // for (let category of this.props.event.categories) {
+      //   desc += category[0] + ' ';
+      // }
 
       return (
         <div className="event-entry">
           <div>
-            <img src={this.props.event.image_url} alt="IMG" />
+            <img src={this.props.event.image} alt="IMG" />
           </div>
           <div className= 'link'> 
             <a href={this.props.event.url}> link to website </a>
@@ -63,13 +63,12 @@ class CurrentEvent extends React.Component {
             </div>
           </div>
           <div className='event-entry-location'>
-            {`${this.props.event.location.address[0]} ${this.props.event.location.city}
-            ${this.props.event.location.state_code}, ${this.props.event.location.postal_code}` }
+            {this.props.event.location}
           </div>
           <nav>
             <div className='comments'> 
-              <img src={this.props.event.snippet_image_url} />
-              {`: ${this.props.event.snippet_text}`}
+              <img src={this.props.event.image} />
+              {`: ${this.props.event.description}`}
             </div>
           </nav>
           <form onSubmit={this.handleOnClick.bind(this)}> 
