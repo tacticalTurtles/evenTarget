@@ -7,10 +7,17 @@ export default function reducer(state={
 }, action) {
 
   switch (action.type) {
-    
+
     case "SET_CURRENT_SESSION": {
-      console.log('in session')
+      if (state.bookmarks.length === 0) {
+        state.bookmarks = state.tempBookmarks;
+      }
+      if (state.events.length === 0) {
+        state.events = state.tempEvents;
+      }
       return { ...state, 
+        tempBookmarks: state.bookmarks.splice(0),
+        bookmarks: [],
         tempEvents: state.events.splice(0),
         events: [],
         currentEvent: action.payload
@@ -18,23 +25,31 @@ export default function reducer(state={
     }
 
     case "ADD_TO_BOOKMARKS": {
-      var tempBookmark = state.tempBookmarks.splice(0);
-      tempBookmarks.push(action.payload);
-      return {...state, 
-        tempBookmarks: tempBookmark
+      state.tempBookmarks.push(action.payload);
+      return {...state,
+        currentEvent: null
       }
     }
 
     case "SHOW_HOME": {
+      if (state.tempEvents.length === 0) {
+        state.tempEvents = state.events;
+      }
+      if (state.bookmarks.length === 0) {
+        state.bookmarks = state.tempBookmarks;
+      }
       return {...state,
         tempBookmarks: state.bookmarks.splice(0),
         bookmarks: [],
-        events: state.tempEvents.splice(0),
+        events: state.tempEvents.splice(0) || state.events,
         currentEvent: null
       }
     }
 
     case 'SHOW_BOOKMARKS': {
+      if (state.events.length === 0) {
+        state.events = state.tempEvents;
+      }
       return { ...state,
         bookmarks: state.tempBookmarks.splice(0),
         tempEvents: state.events.splice(0),
@@ -45,7 +60,8 @@ export default function reducer(state={
 
     case 'FETCH_EVENTS_FULFILLED': {
       return {...state,
-        events: action.payload
+        events: action.payload,
+        currentEvent: null
       }
     }
   }
