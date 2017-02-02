@@ -36,11 +36,7 @@ class Search extends React.Component {
             placeholder="find your target"
             onChange={this.handleInputChange.bind(this)}
           />
-          <button
-            type="button"
-            onClick={this.handleOnClick.bind(this)}
-            > search this bitch 
-          </button>
+        <button onClick={this.handleOnClick.bind(this)}>Search</button>
         </form>
       </div>
     );
