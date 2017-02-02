@@ -1,5 +1,4 @@
 export function handleEventClick(event) {
-  console.log('event', event);
   return {
     type: 'SET_CURRENT_SESSION',
     payload: event
