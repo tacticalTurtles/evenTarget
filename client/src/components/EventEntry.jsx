@@ -1,4 +1,6 @@
 import React from 'react';
+import {addToBookmarks, handleEventClick} from '../redux/actions/appActions.js'
+
 
 var EventEntry = ({event, handleEventClick, addToBookmarks}) => {
   var desc = '';

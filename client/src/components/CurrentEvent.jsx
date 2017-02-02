@@ -1,19 +1,20 @@
 import React from 'react';
+import {handleInputChange} from '../redux/actions/currentEventActions.js';
+import {handleEventClick} from '../redux/actions/appActions.js';
+import { connect } from "react-redux";
 
+@connect((store) => {
+  return {
+    searchValue: store.search.searchValue
+  };
+})
 class CurrentEvent extends React.Component { 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      comment: ''
-    };
-  }
-
-  handleInputChange(e) {
-    this.setState({
-      comment: e.target.value
-    });
-  }
+  // handleInputChange(e) {
+  //   this.setState({
+  //     comment: e.target.value
+  //   });
+  // }
 
   handleOnClick(e) {
     var options = {
@@ -72,17 +73,17 @@ class CurrentEvent extends React.Component {
               {`: ${this.props.event.snippet_text}`}
             </div>
           </nav>
-          <form onSubmit={this.handleOnClick.bind(this)}> 
+          <form onSubmit={handleEventClick.bind(this)}> 
             <input 
               className="form-control"
               type="text"
-              value={this.state.searchValue}
+              value={this.props.searchValue}
               placeholder="insert comment here"
-              onChange={this.handleInputChange.bind(this)}
+              onChange={handleInputChange.bind(this)}
             />
             <button
               type="button"
-              onClick={this.handleOnClick.bind(this)}
+              onClick={handleEventClick.bind(this)}
               > enter comment
             </button>
           </form>

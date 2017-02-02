@@ -1,5 +1,6 @@
 import React from 'react';
 import EventEntry from './EventEntry.jsx';
+import {handleEventClick} from '../redux/actions/appActions.js';
 
 var Bookmarks = ({events, handleEventClick}) => {
   return (
@@ -8,7 +9,7 @@ var Bookmarks = ({events, handleEventClick}) => {
       return (
         <EventEntry
           event={event}
-          handleEventClick={handleEventClick}
+          handleEventClick={handleEventClick.bind(this)}
         />
       );
     })}

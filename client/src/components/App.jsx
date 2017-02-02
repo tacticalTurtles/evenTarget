@@ -5,83 +5,52 @@ import CurrentEvent from './CurrentEvent.jsx';
 import Bookmarks from './Bookmarks.jsx';
 // import eventData from '../data/data.js'; //remove later
 import React from 'react';
+import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
 import $ from 'jquery';
+import * as app from '../redux/actions/appActions.js';
 
+@connect((store) => {
+  return {
+    bookmarks: store.app.bookmarks,
+    tempBookmarks: store.app.tempBookmarks,
+    events: store.app.events,
+    tempEvents: store.app.tempEvents,
+    currentEvent: store.app.currentEvent
+  };
+})
 class App extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      bookmarks: [],
-      tempBookmarks: [],
-      events: [],
-      tempEvents: [],
-      currentEvent: null
-    };
-  }
-
-  componentWillMount() {
+  componentDidMount() {
 	//sets the current events in the state array to the data we aquire (x10)
     // this.state.events = eventData;
+
   }
 
   //changes this event to the clicked event when a file is clicked
   handleEventClick(event) {
-    this.setState({
-      tempEvents: this.state.events.splice(0),
-      events: [],
-      currentEvent: event
-    });
+    let {dispatch} = this.props;
+    dispatch(app.handleEventClick(event));
   }
 
   addToBookmarks(event) {
-    this.state.tempBookmarks.push(event);
-    console.log('added');
-    console.log(this.state.bookmarks);
+    let {dispatch} = this.props;
+    dispatch(app.addToBookmarks(event));
   }
 
   showHome() {
-    this.setState({
-      tempBookmarks: this.state.bookmarks.splice(0),
-      bookmarks: [],
-      events: this.state.tempEvents.splice(0),
-      currentEvent: null
-    });
-    console.log('temp', this.state.tempBookmarks);
+    let {dispatch} = this.props;
+    dispatch(app.showHome());
   }
 
   showBookmarks() {
-    this.setState({
-      bookmarks: this.state.tempBookmarks.splice(0),
-      tempEvents: this.state.events.splice(0),
-      events: [],
-      currentEvent: null
-    });
-    console.log('temp', this.state.tempBookmarks);
+    let {dispatch} = this.props;
+    dispatch(app.showBookmarks());
   }
 
   getEvents(query) {
-    var options = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        term: query,
-        location: 'San Francisco'
-      })
-    };
-
-    fetch('/getData', options)
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((data) => {
-        this.setState({
-          'events': data
-        });
-      });
+    let {dispatch} = this.props;
+    dispatch(app.getEvents(query));
   }
 
   render() {
@@ -89,23 +58,15 @@ class App extends React.Component {
       <div>
         <div className="col-md-3"></div>
         <div className="col-md-6">
-          <Nav
-            showBookmarks={this.showBookmarks.bind(this)}
-            showHome={this.showHome.bind(this)}
-          />
+          <Nav showBookmarks={this.showBookmarks.bind(this)} showHome={this.showHome.bind(this)}/>
           <Search getEvents={this.getEvents.bind(this)} />
-          <EventList
-            events={this.state.events}
-            handleEventClick={this.handleEventClick.bind(this)}
-            addToBookmarks={this.addToBookmarks.bind(this)}
-          />
-          <CurrentEvent event={this.state.currentEvent} />
-          <Bookmarks events={this.state.bookmarks} handleEventClick={this.handleEventClick.bind(this)} />
+          <EventList events={this.props.events} handleEventClick={this.handleEventClick.bind(this)} addToBookmarks={this.addToBookmarks.bind(this)}/>
+          <CurrentEvent event={this.props.currentEvent} />
+          <Bookmarks events={this.props.bookmarks} handleEventClick={this.handleEventClick.bind(this)}/>
         </div>
       </div>
     );
   }
-}
+};
 
-// window.App = App;
 export default App;
