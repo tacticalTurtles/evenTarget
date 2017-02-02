@@ -34,6 +34,8 @@ class App extends React.Component {
     });
   }
 
+
+  
   addToBookmarks(event) {
     this.state.tempBookmarks.push(event);
     console.log('added');
@@ -60,6 +62,7 @@ class App extends React.Component {
     console.log('temp', this.state.tempBookmarks);
   }
 
+// posts to server side '/getData' sending two params {term: 'search', location: 'location'}
   getEvents(query) {
     var options = {
       method: 'POST',
@@ -78,6 +81,7 @@ class App extends React.Component {
         return resp.json();
       })
       .then((data) => {
+        console.log('data in app', data);
         this.setState({
           'events': data
         });
