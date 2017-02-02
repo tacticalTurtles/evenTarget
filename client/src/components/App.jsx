@@ -29,6 +29,7 @@ class App extends React.Component {
     });
   }
 
+  // posts to server side '/getData' sending two params {term: 'search', location: 'location'}
   getEvents(query) {
     var options = {
       method: 'POST',
@@ -47,6 +48,7 @@ class App extends React.Component {
         return resp.json();
       })
       .then((data) => {
+        console.log('data in app', data);
         this.setState({
           'events': data
         })
