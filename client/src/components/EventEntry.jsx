@@ -1,6 +1,6 @@
 import React from 'react';
 
-var EventEntry = ({event, handleEventClick}) => {
+var EventEntry = ({event, handleEventClick, addToBookmarks}) => {
   var desc = '';
   for (let category of event.categories) {
     desc += category[0] + ' ';
@@ -23,6 +23,7 @@ var EventEntry = ({event, handleEventClick}) => {
         {`${event.location.address[0]} ${event.location.city}
         ${event.location.state_code}, ${event.location.postal_code}` }
       </div>
+      <span className="glyphicon glyphicon-plus" onClick={() => addToBookmarks(event)}></span>
     </div>
   );
 };
