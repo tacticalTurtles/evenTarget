@@ -1,27 +1,27 @@
 import React from 'react';
 
 var EventEntry = ({event, handleEventClick}) => {
-  var desc = '';
-  for (let category of event.categories) {
-    desc += category[0] + ' ';
-  }
+  // console.log('event', event);
+  // var desc = '';
+  // for (let category of event.categories) {
+  //   desc += category[0] + ' ';
+  // }
 
   return (
     <div className="event-entry">
       <div>
-        <img src={event.image_url} alt="IMG" />
+        <img src={event.image} alt="IMG" />
       </div>
       <div>
         <div className="event-entry-title" onClick={() => handleEventClick(event)}>
           {event.name}
         </div>
         <div className="event-entry-detail">
-          {desc}
+          {event.description}
         </div>
       </div>
       <div className='event-entry-location'>
-        {`${event.location.address[0]} ${event.location.city}
-        ${event.location.state_code}, ${event.location.postal_code}` }
+        {event.location}
       </div>
     </div>
   );
@@ -32,5 +32,3 @@ EventEntry.propTypes = {
 };
 
 export default EventEntry;
-// window.EventEntry = EventEntry;
-// export {EventEntry};
