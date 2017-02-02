@@ -1,11 +1,11 @@
 import React from 'react';
 
-var EventEntry = ({event, handleEventClick}) => {
-  // console.log('event', event);
-  // var desc = '';
-  // for (let category of event.categories) {
-  //   desc += category[0] + ' ';
-  // }
+
+var EventEntry = ({event, handleEventClick, addToBookmarks}) => {
+  var desc = '';
+  for (let category of event.categories) {
+    desc += category[0] + ' ';
+  }
 
   return (
     <div className="event-entry">
@@ -23,6 +23,7 @@ var EventEntry = ({event, handleEventClick}) => {
       <div className='event-entry-location'>
         {event.location}
       </div>
+      <span className="glyphicon glyphicon-plus" onClick={() => addToBookmarks(event)}></span>
     </div>
   );
 };

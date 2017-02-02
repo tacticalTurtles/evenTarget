@@ -13,7 +13,8 @@ var config = {
           include: SRC_DIR,
           loader: 'babel-loader',
           query: {
-            presets: ['es2015', 'react']
+            presets: ['es2015', 'react'],
+            plugins: ['transform-decorators-legacy', 'transform-object-rest-spread']
           }
         }
       ]
