@@ -3,11 +3,11 @@ import {handleInputChange} from '../redux/actions/searchActions.js';
 import {handleEventClick} from '../redux/actions/appActions.js';
 import { connect } from "react-redux";
 
-@connect((store) => {
-  return {
-    searchValue: store.search.searchValue
-  };
-})
+// @connect((store) => {
+//   return {
+//     searchValue: store.search.searchValue
+//   };
+// })
 class Search extends React.Component {
   constructor(props) {
     super(props);
