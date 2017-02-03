@@ -8,7 +8,7 @@ var Bookmarks = ({events, handleEventClick}) => {
       return (
         <EventEntry
           event={event}
-          handleEventClick={handleEventClick}
+          handleEventClick={handleEventClick.bind(this)}
         />
       );
     })}

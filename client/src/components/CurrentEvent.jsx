@@ -1,11 +1,20 @@
 import React from 'react';
+import {handleInputChange} from '../redux/actions/currentEventActions.js';
+import {handleEventClick} from '../redux/actions/appActions.js';
+import { connect } from "react-redux";
 
+// @connect((store) => {
+//   return {
+//     comment: store.CurrentEvent.comment
+//   };
+// })
 class CurrentEvent extends React.Component { 
+
   constructor(props) {
     super(props);
 
     this.state = {
-      comment: ''
+       comment: ''
     };
   }
 
@@ -15,7 +24,7 @@ class CurrentEvent extends React.Component {
     });
   }
 
-  handleOnClick(e) {
+  sendComment(e) {
     var options = {
       method: 'POST',
       headers: {
@@ -26,7 +35,6 @@ class CurrentEvent extends React.Component {
         comment: this.state.comment
       })
     };
-
     fetch('/postComment', options)
       .then((resp) => {
         console.log('posted')
@@ -71,17 +79,17 @@ class CurrentEvent extends React.Component {
               {`: ${this.props.event.description}`}
             </div>
           </nav>
-          <form onSubmit={this.handleOnClick.bind(this)}> 
+          <form onSubmit={this.sendComment.bind(this)}> 
             <input 
               className="form-control"
               type="text"
-              value={this.state.searchValue}
+              value={this.state.comment}
               placeholder="insert comment here"
               onChange={this.handleInputChange.bind(this)}
             />
             <button
               type="button"
-              onClick={this.handleOnClick.bind(this)}
+              onClick={this.sendComment.bind(this)}
               > enter comment
             </button>
           </form>

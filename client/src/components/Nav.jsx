@@ -19,5 +19,3 @@ var Nav = ({showBookmarks, showHome}) => (
 );
 
 export default Nav;
-// window.Nav = Nav;
-// export {Nav};
