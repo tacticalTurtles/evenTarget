@@ -15,7 +15,9 @@ class CurrentEvent extends React.Component {
 
     this.state = {
       comment: '',
-      comments: []
+      comments: [],
+      comfort: 0,
+      comfortNumber: 0
     };
   }
 
@@ -129,7 +131,10 @@ class CurrentEvent extends React.Component {
       .then((resp) => {
         return resp.json()
       }).then((resp) => {
-        console.log('comfort', resp);
+        this.setState({
+          comfort: resp.comfort,
+          comfortNumber: resp.comfortNumber
+        })
       })
   }
 
@@ -155,6 +160,8 @@ class CurrentEvent extends React.Component {
           <div className='event-entry-location'>
             {this.props.event.location.address[0]}
           </div>
+          <div className='comfortDisplay'>
+            comfort level: {this.state.comfort}, Number of ratings: {this.state.comfortNumber}
           <div id='emotion'>
             <label> comfort level </label>
             <input type='radio' name='comfort' value='1' onClick={this.setComfortLevel.bind(this)}/>
