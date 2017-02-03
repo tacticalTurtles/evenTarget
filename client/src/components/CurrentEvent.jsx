@@ -1,20 +1,21 @@
 import React from 'react';
 import {handleInputChange} from '../redux/actions/currentEventActions.js';
 import {handleEventClick} from '../redux/actions/appActions.js';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 // @connect((store) => {
 //   return {
 //     comment: store.CurrentEvent.comment
 //   };
 // })
-class CurrentEvent extends React.Component { 
+class CurrentEvent extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      searchValue: ''
+      comment: '',
+      comments: []
     };
   }
 
@@ -22,6 +23,43 @@ class CurrentEvent extends React.Component {
     this.setState({
       comment: e.target.value
     });
+  }
+  componentWillMount() {
+    this.getComments();
+  }
+
+  componentDidUpdate() {
+    this.getComments();
+  }
+
+  getComments() {
+    var options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        getEventid: this.props.event.id
+      })
+    };
+
+    fetch('/getcomments', options)
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((comments) => {
+        var newComments = [];
+        for (var i = 0; i < comments.length; i++) {
+          newComments.push(comments[i].comment);
+        }
+        this.setState({
+          comments: newComments
+        });
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   sendComment(e) {
@@ -32,15 +70,30 @@ class CurrentEvent extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        comment: this.state.comment
+        comment: this.state.comment,
+        eventid: this.props.event.id
       })
     };
-    fetch('/postComment', options)
+
+    fetch('/postcomment', options)
       .then((resp) => {
-        console.log('posted')
+        return resp.json();
+      })
+      .then((data) => {
+        // console log here to test
+      })
+      .catch((error) => {
+        throw error;
       });
+
+    this.setState({
+      comment: ''
+    });
     e.preventDefault();
+    console.log('posted');
   }
+
+
 
   setComfortLevel(e) {
     var options = {
@@ -55,25 +108,20 @@ class CurrentEvent extends React.Component {
     };
     fetch('/postComfort', options)
       .then((resp) => {
-        console.log('posted')
+        console.log('posted');
       });
     e.preventDefault();
   }
 
   render() {
     var desc = '';
-    if(this.props.event) {
-
-      for (let category of this.props.event.categories) {
-        desc += category[0] + ' ';
-      }
-
+    if (this.props.event.id) {
       return (
         <div className="event-entry">
           <div>
-            <img src={this.props.event.image_url} alt="IMG" />
+            <img src={this.props.event.image} alt="IMG" />
           </div>
-          <div className= 'link'> 
+          <div className= 'link'>
             <a href={this.props.event.url}> link to website </a>
           </div>
           <div>
@@ -85,10 +133,9 @@ class CurrentEvent extends React.Component {
             </div>
           </div>
           <div className='event-entry-location'>
-            {`${this.props.event.location.address[0]} ${this.props.event.location.city}
-            ${this.props.event.location.state_code}, ${this.props.event.location.postal_code}` }
+            {this.props.event.location}
           </div>
-          <div id='emotion'> 
+          <div id='emotion'>
             <label> comfort level </label>
             <input type='radio' name='comfort' value='1' onClick={this.setComfortLevel.bind(this)}/>
               <label ><img src='./data/pukingFace.png' /> </label>
@@ -102,13 +149,20 @@ class CurrentEvent extends React.Component {
               <label ><img src='data/5.png' /> </label>
           </div>
           <nav>
-            <div className='comments'> 
-              <img src={this.props.event.snippet_image_url} />
-              {`: ${this.props.event.snippet_text}`}
+            <div className='comments'>
+              <img src={this.props.event.image} />
+              {`: ${this.props.event.description}`}
             </div>
           </nav>
-          <form onSubmit={this.sendComment.bind(this)}> 
-            <input 
+          <ul className="list-group">
+            {this.state.comments.map( (comment) => {
+              return (
+                <li className="list-group-item">{comment}</li>
+              );
+            })}
+          </ul>
+          <form onSubmit={this.sendComment.bind(this)}>
+            <input
               className="form-control"
               type="text"
               value={this.state.comment}
@@ -124,9 +178,9 @@ class CurrentEvent extends React.Component {
         </div>
       );
     } else {
-        return null;
+      return null;
     }
   }
-};
+}
 
 export default CurrentEvent;

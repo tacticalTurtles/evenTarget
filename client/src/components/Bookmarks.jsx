@@ -1,10 +1,9 @@
 import React from 'react';
 import EventEntry from './EventEntry.jsx';
-import {handleEventClick} from '../redux/actions/appActions.js';
 
 var Bookmarks = ({events, handleEventClick}) => {
   return (
-  <div className="col-md-6 col-md-offset-3">
+  <div className="event-list">
     {events.map( (event) => {
       return (
         <EventEntry

@@ -3,7 +3,7 @@ export default function reducer(state={
   tempBookmarks: [],
   events: [],
   tempEvents: [],
-  currentEvent: null
+  currentEvent: {}
 }, action) {
 
   switch (action.type) {
@@ -27,7 +27,7 @@ export default function reducer(state={
     case "ADD_TO_BOOKMARKS": {
       state.tempBookmarks.push(action.payload);
       return {...state,
-        currentEvent: null
+        currentEvent: {}
       }
     }
 
@@ -42,7 +42,7 @@ export default function reducer(state={
         tempBookmarks: state.bookmarks.splice(0),
         bookmarks: [],
         events: state.tempEvents.splice(0) || state.events,
-        currentEvent: null
+        currentEvent: {}
       }
     }
 
@@ -54,14 +54,14 @@ export default function reducer(state={
         bookmarks: state.tempBookmarks.splice(0),
         tempEvents: state.events.splice(0),
         events: [],
-        currentEvent: null
+        currentEvent: {}
       }
     }
 
     case 'FETCH_EVENTS_FULFILLED': {
       return {...state,
         events: action.payload,
-        currentEvent: null
+        currentEvent: {}
       }
     }
   }
