@@ -64,6 +64,7 @@ app.get('/getData', function(req, res, next) {
 	helper.getData((data) => res.send(data))
 });
 
+
 app.post('/postcomment', function(req, res, next) {
 	helper.insertIntoComments(req.body.comment, req.body.eventid, (inserted) => {
 		res.send(req.body.comment);
@@ -75,5 +76,10 @@ app.post('/getcomments', function(req, res, next) {
 		res.send(comments);
 	})
 })
+
+app.post('/postComfort', function(req, res, next) {
+	
+});
+
 
 module.exports = app;

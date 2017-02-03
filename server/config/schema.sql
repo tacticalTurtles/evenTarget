@@ -35,6 +35,7 @@ CREATE TABLE comments (
 -- ALTER TABLE users ADD CONSTRAINT FK_users FOREIGN KEY (eventid) REFERENCES events(id);
 -- ALTER TABLE events ADD CONSTRAINT FK_events FOREIGN KEY (userid) REFERENCES users(id);
 
+
 -- location: 944 Market Street San Francisco, CA 94121
 -- Login: mysql -u root -p
 -- Start: mysql.server.start
