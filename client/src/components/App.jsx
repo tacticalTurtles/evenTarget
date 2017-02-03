@@ -6,7 +6,6 @@ import Bookmarks from './Bookmarks.jsx';
 // import eventData from '../data/data.js'; //remove later
 import React from 'react';
 import { connect } from "react-redux";
-import {bindActionCreators} from 'redux';
 import $ from 'jquery';
 import * as app from '../redux/actions/appActions.js';
 
