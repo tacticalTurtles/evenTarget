@@ -1,21 +1,21 @@
 import React from 'react';
 import {handleInputChange} from '../redux/actions/currentEventActions.js';
 import {handleEventClick} from '../redux/actions/appActions.js';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 // @connect((store) => {
 //   return {
 //     comment: store.CurrentEvent.comment
 //   };
 // })
-class CurrentEvent extends React.Component { 
+class CurrentEvent extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-       comment: '',
-       comments: []
+      comment: '',
+      comments: []
     };
   }
 
@@ -25,11 +25,11 @@ class CurrentEvent extends React.Component {
     });
   }
   componentWillMount() {
-    this.getComments(); 
+    this.getComments();
   }
 
   componentDidUpdate() {
-    this.getComments(); 
+    this.getComments();
   }
 
   getComments() {
@@ -49,18 +49,18 @@ class CurrentEvent extends React.Component {
         return resp.json();
       })
       .then((comments) => {
-        var newComments = []
+        var newComments = [];
         for (var i = 0; i < comments.length; i++) {
           newComments.push(comments[i].comment);
         }
         this.setState({
           comments: newComments
-        })
+        });
       })
       .catch((err) => {
         throw err;
-      })
-  } 
+      });
+  }
 
   sendComment(e) {
     var options = {
@@ -84,18 +84,16 @@ class CurrentEvent extends React.Component {
       })
       .catch((error) => {
         throw error;
-      })
+      });
 
     this.setState({
       comment: ''
-    })
+    });
     e.preventDefault();
+    console.log('posted');
   }
 
-        console.log('posted')
-      });
-    e.preventDefault();
-  }
+
 
   setComfortLevel(e) {
     var options = {
@@ -110,7 +108,7 @@ class CurrentEvent extends React.Component {
     };
     fetch('/postComfort', options)
       .then((resp) => {
-        console.log('posted')
+        console.log('posted');
       });
     e.preventDefault();
   }
@@ -123,7 +121,7 @@ class CurrentEvent extends React.Component {
           <div>
             <img src={this.props.event.image} alt="IMG" />
           </div>
-          <div className= 'link'> 
+          <div className= 'link'>
             <a href={this.props.event.url}> link to website </a>
           </div>
           <div>
@@ -137,7 +135,7 @@ class CurrentEvent extends React.Component {
           <div className='event-entry-location'>
             {this.props.event.location}
           </div>
-          <div id='emotion'> 
+          <div id='emotion'>
             <label> comfort level </label>
             <input type='radio' name='comfort' value='1' onClick={this.setComfortLevel.bind(this)}/>
               <label ><img src='./data/pukingFace.png' /> </label>
@@ -151,7 +149,7 @@ class CurrentEvent extends React.Component {
               <label ><img src='data/5.png' /> </label>
           </div>
           <nav>
-            <div className='comments'> 
+            <div className='comments'>
               <img src={this.props.event.image} />
               {`: ${this.props.event.description}`}
             </div>
@@ -163,8 +161,8 @@ class CurrentEvent extends React.Component {
               );
             })}
           </ul>
-          <form onSubmit={this.sendComment.bind(this)}> 
-            <input 
+          <form onSubmit={this.sendComment.bind(this)}>
+            <input
               className="form-control"
               type="text"
               value={this.state.comment}
@@ -183,6 +181,6 @@ class CurrentEvent extends React.Component {
       return null;
     }
   }
-};
+}
 
 export default CurrentEvent;
