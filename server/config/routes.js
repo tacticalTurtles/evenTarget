@@ -36,10 +36,30 @@ app.get('/getData', function(req, res, next) {
 	helper.getData((data) => res.send(data))
 });
 
-app.post('/postComfort', function(req, res, next) {
-	helper.postComfort( req.body, (data) => {
-
+app.post('/postcomment', function(req, res, next) {
+	helper.insertIntoComments(req.body.comment, req.body.eventid, (inserted) => {
+		res.send(req.body.comment);
 	})
 });
+
+app.post('/getcomments', function(req, res, next) {
+	helper.getEventComments(req.body.getEventid, (comments) => {
+		res.send(comments);
+	})
+})
+
+app.post('/postComfort', function(req, res, next) {
+	helper.postComfort( req.body, (data) => {
+		res.send('success');
+	})
+});
+
+app.post('/getComfort', (req, res, next) => {
+	helper.getComfort( req.body.id, (data) => {
+		res.send(data);
+	})
+})
+
+
 
 module.exports = app;
