@@ -62,5 +62,8 @@ app.get('/getData', function(req, res, next) {
 	helper.getData((data) => res.send(data))
 });
 
+app.post('/postComfort', function(req, res, next) {
+	
+});
 
 module.exports = app;
