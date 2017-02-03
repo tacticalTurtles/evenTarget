@@ -14,7 +14,7 @@ class CurrentEvent extends React.Component {
     super(props);
 
     this.state = {
-      searchValue: ''
+       comment: ''
     };
   }
 
