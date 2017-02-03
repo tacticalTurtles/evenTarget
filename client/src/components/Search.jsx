@@ -1,6 +1,4 @@
 import React from 'react';
-import {handleInputChange} from '../redux/actions/searchActions.js';
-import {handleEventClick} from '../redux/actions/appActions.js';
 import { connect } from "react-redux";
 
 // @connect((store) => {
