@@ -1,5 +1,4 @@
 import React from 'react';
-import {showBookmarks, showHome} from '../redux/actions/appActions.js'
 
 var Nav = ({showBookmarks, showHome}) => (
   <nav className="navbar">
