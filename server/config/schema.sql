@@ -12,7 +12,8 @@ CREATE TABLE events (
   location TEXT,
   description TEXT,
   url TEXT,
-  image TEXT
+  image TEXT,
+  comfort FLOAT[2, 1]
 )
 
 -- location: 944 Market Street San Francisco, CA 94121
