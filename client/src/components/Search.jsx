@@ -1,5 +1,13 @@
 import React from 'react';
+import {handleInputChange} from '../redux/actions/searchActions.js';
+import {handleEventClick} from '../redux/actions/appActions.js';
+import { connect } from "react-redux";
 
+// @connect((store) => {
+//   return {
+//     searchValue: store.search.searchValue
+//   };
+// })
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +28,8 @@ class Search extends React.Component {
   }
 
   handleOnClick(e) {
-    this.props.getEvents(this.state.searchValue);
     e.preventDefault();
+    this.props.getEvents(this.state.searchValue);
     return false;
   }
 
@@ -36,7 +44,11 @@ class Search extends React.Component {
             placeholder="find your target"
             onChange={this.handleInputChange.bind(this)}
           />
-        <button onClick={this.handleOnClick.bind(this)}>Search</button>
+          <button
+            type="button"
+            onClick={this.handleOnClick.bind(this)}
+            > search 
+            </button>
         </form>
       </div>
     );
@@ -44,5 +56,4 @@ class Search extends React.Component {
 }
 
 export default Search;
-// window.Search = Search;
-// export {Search};
+
