@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
 
-  
+
   addToBookmarks(event) {
     let {dispatch} = this.props;
     dispatch(app.addToBookmarks(event));
@@ -59,15 +59,15 @@ class App extends React.Component {
     return (
       <div>
         <div className="col-md-3"></div>
-        <div className="col-md-6">
-          <Nav showBookmarks={this.showBookmarks.bind(this)} 
+        <div className="col-md-6 entry-list">
+          <Nav showBookmarks={this.showBookmarks.bind(this)}
 		  showHome={this.showHome.bind(this)}/>
           <Search getEvents={this.getEvents.bind(this)} />
-          <EventList events={this.props.events} 
-		  handleEventClick={this.handleEventClick.bind(this)} 
+          <EventList events={this.props.events}
+		  handleEventClick={this.handleEventClick.bind(this)}
 		  addToBookmarks={this.addToBookmarks.bind(this)}/>
           <CurrentEvent event={this.props.currentEvent} />
-          <Bookmarks events={this.props.bookmarks} 
+          <Bookmarks events={this.props.bookmarks}
 		  handleEventClick={this.handleEventClick.bind(this)}/>
         </div>
       </div>

@@ -3,7 +3,7 @@ import EventEntry from './EventEntry.jsx';
 
 var Bookmarks = ({events, handleEventClick}) => {
   return (
-  <div className="col-md-6 col-md-offset-3">
+  <div className="event-list">
     {events.map( (event) => {
       return (
         <EventEntry

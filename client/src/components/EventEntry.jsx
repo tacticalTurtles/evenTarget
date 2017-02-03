@@ -2,10 +2,6 @@ import React from 'react';
 
 
 var EventEntry = ({event, handleEventClick, addToBookmarks}) => {
-  var desc = '';
-  for (let category of event.categories) {
-    desc += category[0] + ' ';
-  }
 
   return (
     <div className="event-entry">
