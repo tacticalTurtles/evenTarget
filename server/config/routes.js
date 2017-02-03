@@ -37,7 +37,9 @@ app.get('/getData', function(req, res, next) {
 });
 
 app.post('/postComfort', function(req, res, next) {
-	
+	helper.postComfort( req.body, (data) => {
+
+	})
 });
 
 module.exports = app;
