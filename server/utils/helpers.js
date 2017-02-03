@@ -35,3 +35,11 @@ exports.searchYelp = function(term, location, cb) {
   });
 }
 
+exports.postComfort = (event, cb) => {
+  db.query('SELECT comfortNumber from comfort where eventID ', (err, data) => {
+    data += 1
+    var queryString = `INSERT INTO comfort(comfort, comfortNumber)
+      VALUES ('${event.rating}','${data}')`;
+    db.query(queryString, (err, data) => cb(data));
+  });
+};
