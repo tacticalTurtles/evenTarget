@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS events;
 CREATE TABLE events (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
-  location TEXT NOT NULL,
+  location TEXT,
   description TEXT,
   url TEXT,
   image TEXT

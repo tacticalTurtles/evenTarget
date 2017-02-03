@@ -33,6 +33,8 @@ class App extends React.Component {
     dispatch(app.handleEventClick(event));
   }
 
+
+  
   addToBookmarks(event) {
     let {dispatch} = this.props;
     dispatch(app.addToBookmarks(event));
@@ -48,6 +50,7 @@ class App extends React.Component {
     dispatch(app.showBookmarks());
   }
 
+// posts to server side '/getData' sending two params {term: 'search', location: 'location'}
   getEvents(query) {
     let {dispatch} = this.props;
     dispatch(app.getEvents(query));
