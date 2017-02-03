@@ -14,7 +14,8 @@ class CurrentEvent extends React.Component {
     super(props);
 
     this.state = {
-       comment: ''
+       comment: '',
+       comments: []
     };
   }
 
@@ -23,6 +24,43 @@ class CurrentEvent extends React.Component {
       comment: e.target.value
     });
   }
+  componentWillMount() {
+    this.getComments(); 
+  }
+
+  componentDidUpdate() {
+    this.getComments(); 
+  }
+
+  getComments() {
+    var options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        getEventid: this.props.event.id
+      })
+    };
+
+    fetch('/getcomments', options)
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((comments) => {
+        var newComments = []
+        for (var i = 0; i < comments.length; i++) {
+          newComments.push(comments[i].comment);
+        }
+        this.setState({
+          comments: newComments
+        })
+      })
+      .catch((err) => {
+        throw err;
+      })
+  } 
 
   sendComment(e) {
     var options = {
@@ -32,11 +70,28 @@ class CurrentEvent extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        comment: this.state.comment
+        comment: this.state.comment,
+        eventid: this.props.event.id
       })
     };
-    fetch('/postComment', options)
+
+    fetch('/postcomment', options)
       .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        // console log here to test
+      })
+      .catch((error) => {
+        throw error;
+      })
+
+    this.setState({
+      comment: ''
+    })
+    e.preventDefault();
+  }
+
         console.log('posted')
       });
     e.preventDefault();
@@ -62,12 +117,7 @@ class CurrentEvent extends React.Component {
 
   render() {
     var desc = '';
-    if(this.props.event) {
-
-      // for (let category of this.props.event.categories) {
-      //   desc += category[0] + ' ';
-      // }
-
+    if (this.props.event.id) {
       return (
         <div className="event-entry">
           <div>
@@ -106,6 +156,13 @@ class CurrentEvent extends React.Component {
               {`: ${this.props.event.description}`}
             </div>
           </nav>
+          <ul className="list-group">
+            {this.state.comments.map( (comment) => {
+              return (
+                <li className="list-group-item">{comment}</li>
+              );
+            })}
+          </ul>
           <form onSubmit={this.sendComment.bind(this)}> 
             <input 
               className="form-control"
@@ -123,7 +180,7 @@ class CurrentEvent extends React.Component {
         </div>
       );
     } else {
-        return null;
+      return null;
     }
   }
 };

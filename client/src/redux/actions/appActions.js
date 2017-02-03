@@ -12,7 +12,7 @@ export function addToBookmarks(event) {
     payload: event
   }
 };
-
+// 12
 export function showHome() {
   console.log('show home');
   return {

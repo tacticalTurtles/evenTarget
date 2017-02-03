@@ -27,7 +27,8 @@ app.post('/getData', function(req, res, next) {
 	      description: desc,
 	      location: loc,
 	      url: data.businesses[i].url,
-	      image: data.businesses[i].image_url
+	      image: data.businesses[i].image_url,
+	      searchapi: 'yelp'
 			};
 			// insert event data into database (events)
 			helper.insertData(event, (insertedData) => {
@@ -43,7 +44,8 @@ app.post('/getData', function(req, res, next) {
 		      description: eventbriteData.events[i].description.text,
 		      location: loc,
 		      url: eventbriteData.events[i].url,
-		      image: eventbriteData.events[i].logo.url
+		      image: eventbriteData.events[i].logo.url,
+		      searchapi: 'eventbrite'
 				};
 				helper.insertData(event, (insertedEbriteData) => {
 					
@@ -62,8 +64,22 @@ app.get('/getData', function(req, res, next) {
 	helper.getData((data) => res.send(data))
 });
 
+
+app.post('/postcomment', function(req, res, next) {
+	helper.insertIntoComments(req.body.comment, req.body.eventid, (inserted) => {
+		res.send(req.body.comment);
+	})
+});
+
+app.post('/getcomments', function(req, res, next) {
+	helper.getEventComments(req.body.getEventid, (comments) => {
+		res.send(comments);
+	})
+})
+
 app.post('/postComfort', function(req, res, next) {
 	
 });
+
 
 module.exports = app;

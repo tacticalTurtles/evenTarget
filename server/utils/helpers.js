@@ -25,8 +25,8 @@ exports.getData = function (term, location, cb) {
 //   image: 'image link'
 // }
 exports.insertData = function (event, cb) {
-  var queryString = `INSERT INTO events(name, location, description, url, image)
-    VALUES ('${event.name}','${event.location}', '${event.description}', '${event.url}', '${event.image}')`;
+  var queryString = `INSERT INTO events(name, location, description, url, image, searchapi)
+    VALUES ('${event.name}','${event.location}', '${event.description}', '${event.url}', '${event.image}', '${event.searchapi}')`;
   db.query(queryString, function (err, data) {
     cb(data);
   });
@@ -41,5 +41,20 @@ exports.searchYelp = function(term, location, cb) {
   .catch(function (err) {
     console.error(err);
   });
+}
+
+// inserts comment and current event id into comments & cb(data)
+exports.insertIntoComments = function(comment, eventid, cb) {
+  var queryStr = `INSERT INTO comments(comment, eventid) VALUES ('${comment}', '${eventid}')`
+  db.query(queryStr, (err, data) => {
+    cb(data);
+  })
+}
+
+exports.getEventComments = function(id, cb) {
+  var queryStr = `SELECT comment from comments where eventid = '${id}'`;
+  db.query(queryStr, (err, data) => {
+    cb(data);
+  })
 }
 
