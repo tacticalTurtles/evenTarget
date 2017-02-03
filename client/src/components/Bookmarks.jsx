@@ -1,6 +1,5 @@
 import React from 'react';
 import EventEntry from './EventEntry.jsx';
-import {handleEventClick} from '../redux/actions/appActions.js';
 
 var Bookmarks = ({events, handleEventClick}) => {
   return (
