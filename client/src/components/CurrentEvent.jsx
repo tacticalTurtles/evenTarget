@@ -39,12 +39,26 @@ class CurrentEvent extends React.Component {
       .then((resp) => {
         console.log('posted')
       });
-    this.setState({
-      comment: ''
-    });
     e.preventDefault();
   }
 
+  setComfortLevel(e) {
+    var options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        comfort: e.target.value
+      })
+    };
+    fetch('/postComfort', options)
+      .then((resp) => {
+        console.log('posted')
+      });
+    e.preventDefault();
+  }
 
   render() {
     var desc = '';
@@ -73,6 +87,19 @@ class CurrentEvent extends React.Component {
           <div className='event-entry-location'>
             {`${this.props.event.location.address[0]} ${this.props.event.location.city}
             ${this.props.event.location.state_code}, ${this.props.event.location.postal_code}` }
+          </div>
+          <div id='emotion'> 
+            <label> comfort level </label>
+            <input type='radio' name='comfort' value='1' onClick={this.setComfortLevel.bind(this)}/>
+              <label ><img src='./data/pukingFace.png' /> </label>
+            <input type='radio' name='comfort' value='2' onClick={this.setComfortLevel.bind(this)}/>
+              <label ><img src='data/2.jpeg' /> </label>
+            <input type='radio' name='comfort' value='3' onClick={this.setComfortLevel.bind(this)}/>
+              <label ><img src='data/3.png' /> </label>
+            <input type='radio' name='comfort' value='4' onClick={this.setComfortLevel.bind(this)}/>
+              <label ><img src='data/4.jpg' /> </label>
+            <input type='radio' name='comfort' value = '5' onClick={this.setComfortLevel.bind(this)}/>
+              <label ><img src='data/5.png' /> </label>
           </div>
           <nav>
             <div className='comments'> 
