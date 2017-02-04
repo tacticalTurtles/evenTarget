@@ -58,3 +58,30 @@ exports.getEventComments = function(id, cb) {
   })
 }
 
+exports.postComfort = (event, cb) => {
+  db.query(`SELECT comfortNumber from comfort where eventId = ${event.id}`, (err, data) => {
+    console.log(data);
+    if (data.length === 0) {
+      var queryString = `INSERT INTO comfort(comfort, comfortNumber, eventId)
+        VALUES ('${event.comfort}','${event.comfortNumber}', '${event.id}')`;
+      db.query(queryString, (err, data) => {
+        console.error(err);
+        cb(data);
+      });
+    } else {
+      var queryString = `UPDATE comfort SET comfort = ${event.comfort}, 
+      comfortNumber = ${event.comfortNumber} where eventId = ${event.id}`;
+      db.query(queryString, (err, data) => {
+        console.error(err);
+        cb(data);
+      });
+    }
+  });
+};
+
+exports.getComfort = function(id, cb) {
+  var queryStr = `SELECT comfort, comfortNumber from comfort where eventId = '${id}'`;
+  db.query(queryStr, (err, data) => {
+    cb(data[0]);
+  })
+}
