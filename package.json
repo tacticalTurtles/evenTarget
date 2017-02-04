@@ -16,10 +16,12 @@
     "bluebird": "*",
     "body-parser": "*",
     "bootstrap": "*",
+    "classnames": "^2.2.5",
     "express": "*",
     "express-session": "*",
     "jade": "*",
     "jquery": "*",
+    "lodash": "^4.17.4",
     "morgan": "*",
     "mysql": "^2.13.0",
     "node-fetch": "^1.6.3",
@@ -35,6 +37,7 @@
     "request": "*",
     "request-promise": "*",
     "sequelize": "^3.30.0",
+    "validator": "^6.2.1",
     "yelp": "*"
   },
   "devDependencies": {

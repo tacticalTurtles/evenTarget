@@ -8,9 +8,14 @@ var Promise = require('bluebird');
 // var searchEventbrite = Promise.promisify(eventbrite.getEventbriteData);
 // var searchYelp = Promise.promisify(helper.searchYelp);
 
+var users = require('./routes/users');
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../../client/dist'));
+
+app.use('/api/users', users);
 
 app.post('/getData', function(req, res, next) {
 	// search yelp api using term and location params & cb(data)
@@ -48,7 +53,7 @@ app.post('/getData', function(req, res, next) {
 		      searchapi: 'eventbrite'
 				};
 				helper.insertData(event, (insertedEbriteData) => {
-					
+
 				})
 			}
 		})
@@ -78,7 +83,7 @@ app.post('/getcomments', function(req, res, next) {
 })
 
 app.post('/postComfort', function(req, res, next) {
-	
+
 });
 
 
