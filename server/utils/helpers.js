@@ -58,3 +58,19 @@ exports.getEventComments = function(id, cb) {
   })
 }
 
+exports.insertIntoUsers = function(user, cb) {
+  var query = `insert into users(username, password) values ('${user.username}', '${user.password}')`;
+  db.query(query, (error, data) => {
+    cb(data);
+  });
+}
+
+exports.getUser = function(user, cb) {
+  var query = `select user from users where username = '${user.username}' and password = '${user.password}'`;
+  db.query(query, function (err, data) {
+    if (err) {
+      throw err;
+    }
+    cb(data);
+  });
+}
