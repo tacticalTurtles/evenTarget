@@ -1,21 +1,26 @@
-// import EventEntry from 'EventEntry';
+import React from 'react';
+import EventEntry from './EventEntry.jsx';
 
-var EventList = ({events, handleEventClick}) => (
-  <div className="event-list media">
-    {events.map((event) =>
-      //makes an event entry for each event in the events file (should be 10)
-      <EventEntry
-      //passes down the click prop as well as the actual event
-        event={event}
-        handleEventClick={handleEventClick}
-      />
-    )}
-  </div>
-);
+var EventList = ({events, handleEventClick, addToBookmarks}) => {
+  return (
+    <div className="event-list media">
+      {events.map( (event) => {
+        return (
+          <EventEntry
+            event={event}
+            handleEventClick={handleEventClick}
+            addToBookmarks={addToBookmarks}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 EventList.propTypes = {
   events: React.PropTypes.array.isRequired
 };
 
-window.EventList = EventList;
+export default EventList;
+// window.EventList = EventList;
 // export {EventList};

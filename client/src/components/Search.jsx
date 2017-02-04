@@ -1,37 +1,57 @@
+import React from 'react';
+import { connect } from "react-redux";
+
+// @connect((store) => {
+//   return {
+//     searchValue: store.search.searchValue
+//   };
+// })
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: ''
+      searchValue: ''
     };
   }
+
 
   //anytime the value of the search bar changes, we change the state.value to the bar
   //and call the handleSearchInputChange with the value as the parameter
   handleInputChange(e) {
-    this.props.handleSearchInputChange(e.target.value);
+    // this.props.getEvents(e.target.value);
     this.setState({
-      value: e.target.value
+      searchValue: e.target.value
     });
+  }
+
+  handleOnClick(e) {
+    e.preventDefault();
+    this.props.getEvents(this.state.searchValue);
+    return false;
   }
 
   render() {
     return (
       <div className="search-bar form-inline">
-        <input
-          className="form-control"
-          type="text"
-          value={this.state.value}
-          onChange={this.handleInputChange.bind(this)}
-        />
-        <button className="btn hidden-sm-down">
-          <span className="glyphicon glyphicon-search"></span>
-        </button>
+        <form onSubmit={this.handleOnClick.bind(this)}>
+          <input
+            className="form-control"
+            type="text"
+            value={this.state.searchValue}
+            placeholder="find your target"
+            onChange={this.handleInputChange.bind(this)}
+          />
+          <button
+            type="button"
+            onClick={this.handleOnClick.bind(this)}
+            > search 
+            </button>
+        </form>
       </div>
     );
   }
-};
+}
 
-window.Search = Search;
-// export {Search};
+export default Search;
+

@@ -1,28 +1,31 @@
-var EventEntry = ({event, handleEventClick}) => (
-  <div className="event-entry">
-    <div className="media-left media-middle">
-      <img className="media-object" src={event.snippet_image_url} alt="" />
-    </div>
-    <div className="media-body">
-      <div 
-        //click handler, will set the current event to the clicked event
-        className="event-entry-title"
-        onClick={() => handleEventClick(event)}
-        //the code below will render the detail, as well as the addresss of the event
-      >
-        {event.name}
-      </div>
-      <div className="event-entry-detail">{event.snippet_text}</div>
-    </div>
-    <div className='event-entry-location'> {`${event.location.address[0]} ${event.location.city} 
-    ${event.location.state_code}, ${event.location.postal_code}` }
-    </div>
-  </div>
-);
+import React from 'react';
 
-EventEntry.propTypes = {
-  video: React.PropTypes.object.isRequired
+
+var EventEntry = ({event, handleEventClick, addToBookmarks}) => {
+
+  return (
+    <div className="event-entry">
+      <div>
+        <img src={event.image} alt="IMG" />
+      </div>
+      <div>
+        <div className="event-entry-title" onClick={() => handleEventClick(event)}>
+          {event.name}
+        </div>
+        <div className="event-entry-detail">
+          {event.description}
+        </div>
+      </div>
+      <div className='event-entry-location'>
+        {event.location}
+      </div>
+      <span className="glyphicon glyphicon-plus" onClick={() => addToBookmarks(event)}></span>
+    </div>
+  );
 };
 
-window.EventEntry = EventEntry;
-// export {EventEntry};
+EventEntry.propTypes = {
+  event: React.PropTypes.object.isRequired
+};
+
+export default EventEntry;
