@@ -43,11 +43,15 @@ router.post('/', (req, res) => {
 
   helper.insertIntoUsers(user, (insertedUser) => {
     console.log(insertedUser + ' successfully added to users table');
+    // res.send something to the homepage for redirect
   });
 });
 
 router.get('/', (req, res) => {
-  console.log('req.params ===', req);
+  helper.getUser(req.query, (foundUserID) => {
+    console.log('user ID ===', foundUserID);
+    // res.send(foundUserID);
+  });
 });
 
 module.exports = router;

@@ -66,11 +66,11 @@ exports.insertIntoUsers = function(user, cb) {
 }
 
 exports.getUser = function(user, cb) {
-  var query = `select user from users where username = '${user.username}' and password = '${user.password}'`;
+  var query = `select id from users where username = '${user.username}'`;
   db.query(query, function (err, data) {
     if (err) {
       throw err;
     }
-    cb(data);
+    cb(data[0].id);
   });
 }
