@@ -62,6 +62,7 @@ class App extends React.Component {
         <div className="col-md-6 entry-list">
           <Nav showBookmarks={this.showBookmarks.bind(this)}
 		  showHome={this.showHome.bind(this)}/>
+          {this.props.children}
           <Search getEvents={this.getEvents.bind(this)} />
           <EventList events={this.props.events}
 		  handleEventClick={this.handleEventClick.bind(this)}
