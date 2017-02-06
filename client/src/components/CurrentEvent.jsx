@@ -32,6 +32,7 @@ class CurrentEvent extends React.Component {
 
   componentDidUpdate() {
     this.getComments();
+    this.getComfortLevel();
   }
 
   getComments() {
