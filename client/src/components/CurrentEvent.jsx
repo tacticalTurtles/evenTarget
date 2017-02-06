@@ -1,13 +1,15 @@
 import React from 'react';
-import {handleInputChange} from '../redux/actions/currentEventActions.js';
+import {getComments, getComfortLevel} from '../redux/actions/currentEventActions.js';
 import {handleEventClick} from '../redux/actions/appActions.js';
 import { connect } from 'react-redux';
 
-// @connect((store) => {
-//   return {
-//     comment: store.CurrentEvent.comment
-//   };
-// })
+@connect((store) => {
+  return {
+    comments: store.currentEvents.comments,
+    comfort: store.currentEvents.comfort,
+    comfortNumber: store.currentEvents.comfortNumber
+  };
+})
 class CurrentEvent extends React.Component {
 
   constructor(props) {
@@ -36,33 +38,8 @@ class CurrentEvent extends React.Component {
   }
 
   getComments() {
-    var options = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        getEventid: this.props.event.id
-      })
-    };
-
-    fetch('/getcomments', options)
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((comments) => {
-        var newComments = [];
-        for (var i = 0; i < comments.length; i++) {
-          newComments.push(comments[i].comment);
-        }
-        this.setState({
-          comments: newComments
-        });
-      })
-      .catch((err) => {
-        throw err;
-      });
+    const {dispatch} = this.props;
+    dispatch(getComments(this.props.event.id));
   }
 
   sendComment(e) {
@@ -83,7 +60,6 @@ class CurrentEvent extends React.Component {
         return resp.json();
       })
       .then((data) => {
-        // console log here to test
       })
       .catch((error) => {
         throw error;
@@ -97,7 +73,8 @@ class CurrentEvent extends React.Component {
   }
 
   setComfortLevel(e) {
-    var comfort = (this.state.comfort * this.state.comfortNumber + Number(e.target.value))/(this.state.comfortNumber + 1);
+    const {comfortNumber} = this.props;
+    var comfort = (this.props.comfort * comfortNumber + Number(e.target.value))/(comfortNumber + 1);
       var options = {
         method: 'POST',
         headers: {
@@ -106,7 +83,7 @@ class CurrentEvent extends React.Component {
         },
         body: JSON.stringify({
           comfort: comfort,
-          comfortNumber: (this.state.comfortNumber + 1),
+          comfortNumber: (comfortNumber + 1),
           id: this.props.event.id
         })
       };
@@ -118,31 +95,14 @@ class CurrentEvent extends React.Component {
     }
 
     getComfortLevel() {
-      var options = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: this.props.event.id
-        })
-      };
-      fetch('/getComfort', options)
-        .then((resp) => {
-          return resp.json()
-        }).then((resp) => {
-
-          this.setState({
-            comfort: resp.comfort,
-            comfortNumber: resp.comfortNumber
-          })
-        })
+      const {dispatch} = this.props;
+      dispatch(getComfortLevel(this.props.event.id));
     }
 
   render() {
     var desc = '';
     if (this.props.event.id) {
+      const {comfort, comfortNumber, comments} = this.props;
       return (
         <div className="event-entry">
           <div>
@@ -163,7 +123,7 @@ class CurrentEvent extends React.Component {
             {this.props.event.location}
           </div>
           <div className='comfortDisplay'>
-            comfort rating: {this.state.comfort}, number of ratings: {this.state.comfortNumber}
+            comfort rating: {comfort}, number of ratings: {comfortNumber}
           </div>
           <div id='emotion'>
             <label> comfort level </label>
@@ -185,7 +145,7 @@ class CurrentEvent extends React.Component {
             </div>
           </nav>
           <ul className="list-group">
-            {this.state.comments.map( (comment) => {
+            {comments.map( (comment) => {
               return (
                 <li className="list-group-item">{comment}</li>
               );
