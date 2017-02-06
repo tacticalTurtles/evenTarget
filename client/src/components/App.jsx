@@ -6,6 +6,7 @@ import Bookmarks from './Bookmarks.jsx';
 // import eventData from '../data/data.js'; //remove later
 import React from 'react';
 import { connect } from "react-redux";
+import {bindActionCreators} from 'redux';
 import $ from 'jquery';
 import * as app from '../redux/actions/appActions.js';
 import FlashMessagesList from './FlashMessagesList.jsx';
@@ -33,8 +34,6 @@ class App extends React.Component {
     dispatch(app.handleEventClick(event));
   }
 
-
-
   addToBookmarks(event) {
     let {dispatch} = this.props;
     dispatch(app.addToBookmarks(event));
@@ -50,7 +49,6 @@ class App extends React.Component {
     dispatch(app.showBookmarks());
   }
 
-// posts to server side '/getData' sending two params {term: 'search', location: 'location'}
   getEvents(query) {
     let {dispatch} = this.props;
     dispatch(app.getEvents(query));
@@ -60,6 +58,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="col-md-3"></div>
+
         <div className="col-md-6 entry-list">
           <div>
             <Nav showBookmarks={this.showBookmarks.bind(this)}
@@ -68,12 +67,9 @@ class App extends React.Component {
             {this.props.children}
           </div>
           <Search getEvents={this.getEvents.bind(this)} />
-          <EventList events={this.props.events}
-		  handleEventClick={this.handleEventClick.bind(this)}
-		  addToBookmarks={this.addToBookmarks.bind(this)}/>
+          <EventList events={this.props.events} handleEventClick={this.handleEventClick.bind(this)} addToBookmarks={this.addToBookmarks.bind(this)}/>
           <CurrentEvent event={this.props.currentEvent} />
-          <Bookmarks events={this.props.bookmarks}
-		  handleEventClick={this.handleEventClick.bind(this)}/>
+          <Bookmarks events={this.props.bookmarks} handleEventClick={this.handleEventClick.bind(this)}/>
         </div>
       </div>
     );
