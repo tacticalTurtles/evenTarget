@@ -78,8 +78,16 @@ app.post('/getcomments', function(req, res, next) {
 })
 
 app.post('/postComfort', function(req, res, next) {
-	
+  helper.postComfort( req.body, (data) => {
+    res.send(data);
+  })
 });
+
+app.post('/getComfort', (req, res, next) => {
+  helper.getComfort( req.body.id, (data) => {
+    res.send(data);
+  })
+})
 
 
 module.exports = app;
