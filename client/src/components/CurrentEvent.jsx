@@ -28,6 +28,7 @@ class CurrentEvent extends React.Component {
   }
   componentWillMount() {
     this.getComments();
+    this.getComfortLevel();
   }
 
   componentDidUpdate() {
@@ -139,6 +140,45 @@ class CurrentEvent extends React.Component {
           })
         })
     }
+    var options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        comfort: e.target.value,
+        id: this.props.event.id
+      })
+    };
+    fetch('/postComfort', options)
+      .then((resp) => {
+        console.log('posted');
+      });
+    e.preventDefault();
+  }
+
+  getComfortLevel() {
+    var options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: this.props.event.id
+      })
+    };
+    fetch('/getComfort', options)
+      .then((resp) => {
+        return resp.json()
+      }).then((resp) => {
+        this.setState({
+          comfort: resp.comfort,
+          comfortNumber: resp.comfortNumber
+        })
+      })
+  }
 
   render() {
     var desc = '';
@@ -160,11 +200,10 @@ class CurrentEvent extends React.Component {
             </div>
           </div>
           <div className='event-entry-location'>
-            {this.props.event.location}
+            {this.props.event.location.address[0]}
           </div>
           <div className='comfortDisplay'>
-            comfort rating: {this.state.comfort}, number of ratings: {this.state.comfortNumber}
-          </div>
+            comfort level: {this.state.comfort}, Number of ratings: {this.state.comfortNumber}
           <div id='emotion'>
             <label> comfort level </label>
             <input type='radio' name='comfort' value='1' onClick={this.setComfortLevel.bind(this)}/>
@@ -214,3 +253,4 @@ class CurrentEvent extends React.Component {
 }
 
 export default CurrentEvent;
+

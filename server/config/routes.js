@@ -1,14 +1,15 @@
 var helper = require('../utils/helpers.js');
 var yelp = require('../utils/yelp.js');
-var eventbrite = require('../utils/eventbrite.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+
 var Promise = require('bluebird');
 var path = require('path');
 // var searchEventbrite = Promise.promisify(eventbrite.getEventbriteData);
 // var searchYelp = Promise.promisify(helper.searchYelp);
 var authenticate = require('../middleware/authenticate.js');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +23,6 @@ app.use('/api/auth', auth);
 // TESTING USER AUTH
 
 app.post('/getData', function(req, res, next) {
-	// search yelp api using term and location params & cb(data)
 	helper.searchYelp(req.body.term, req.body.location, (data) => {
 		for (let i = 0; i < data.businesses.length; i++) {
 			var desc = '';
@@ -30,16 +30,14 @@ app.post('/getData', function(req, res, next) {
 				desc += category[0] + ' ';
 			}
 			var loc = data.businesses[i].location.display_address.join(' ').replace(/[^\w\s]/gi, '');
-			// manipulate data to match database (events) fields
+
 			var event = {
 	      name: data.businesses[i].name,
 	      description: desc,
 	      location: loc,
 	      url: data.businesses[i].url,
-	      image: data.businesses[i].image_url,
-	      searchapi: 'yelp'
+	      image: data.businesses[i].image_url
 			};
-			// insert event data into database (events)
 			helper.insertData(event, (insertedData) => {
 
 			});
@@ -66,13 +64,12 @@ app.post('/getData', function(req, res, next) {
 			res.send(allData)
 		});
 	});
+
 });
 
-// gets all data from events database
 app.get('/getData', function(req, res, next) {
 	helper.getData((data) => res.send(data))
 });
-
 
 app.post('/postcomment', function(req, res, next) {
 	helper.insertIntoComments(req.body.comment, req.body.eventid, (inserted) => {
@@ -101,5 +98,6 @@ app.post('/getComfort', (req, res, next) => {
     res.send(data);
   });
 });
+
 
 module.exports = app;
