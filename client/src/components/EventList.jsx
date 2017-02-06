@@ -4,9 +4,10 @@ import EventEntry from './EventEntry.jsx';
 var EventList = ({events, handleEventClick, addToBookmarks}) => {
   return (
     <div className="event-list media">
-      {events.map( (event) => {
+      {events.map( (event, i) => {
         return (
           <EventEntry
+            key={i}
             event={event}
             handleEventClick={handleEventClick}
             addToBookmarks={addToBookmarks}
