@@ -8,6 +8,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import $ from 'jquery';
 import * as app from '../redux/actions/appActions.js';
+import FlashMessagesList from './FlashMessagesList.jsx';
 
 @connect((store) => {
   return {
@@ -60,8 +61,12 @@ class App extends React.Component {
       <div>
         <div className="col-md-3"></div>
         <div className="col-md-6 entry-list">
-          <Nav showBookmarks={this.showBookmarks.bind(this)}
-		  showHome={this.showHome.bind(this)}/>
+          <div>
+            <Nav showBookmarks={this.showBookmarks.bind(this)}
+  		  showHome={this.showHome.bind(this)}/>
+            <FlashMessagesList />
+            {this.props.children}
+          </div>
           <Search getEvents={this.getEvents.bind(this)} />
           <EventList events={this.props.events}
 		  handleEventClick={this.handleEventClick.bind(this)}

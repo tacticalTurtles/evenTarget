@@ -22,6 +22,10 @@ var config = {
     output: {
       path: DIST_DIR,
       filename: 'bundle.js'
+    },
+    node: {
+      net: 'empty',
+      dns: 'empty'
     }
 };
 

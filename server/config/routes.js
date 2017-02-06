@@ -5,12 +5,24 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var Promise = require('bluebird');
+var path = require('path');
 // var searchEventbrite = Promise.promisify(eventbrite.getEventbriteData);
 // var searchYelp = Promise.promisify(helper.searchYelp);
+var authenticate = require('../middleware/authenticate.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../../client/dist'));
+
+// TESTING USER AUTH
+var users = require('./users.js');
+var auth = require('./auth.js');
+app.use('/api/users', users);
+app.use('/api/auth', auth);
+// TESTING USER AUTH
+
+
+
 
 app.post('/getData', function(req, res, next) {
 	// search yelp api using term and location params & cb(data)
@@ -80,6 +92,10 @@ app.post('/getcomments', function(req, res, next) {
 app.post('/postComfort', function(req, res, next) {
 	
 });
+
+app.get('/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+})
 
 
 module.exports = app;
