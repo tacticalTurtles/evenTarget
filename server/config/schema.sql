@@ -31,6 +31,14 @@ CREATE TABLE comments (
   eventid INT
 );
 
+DROP TABLE IF EXISTS comfort;
+
+CREATE TABLE comfort (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  comfort DECIMAL(2,1),
+  comfortNumber INT,
+  eventId INT UNIQUE
+)
 -- ALTER TABLE comments ADD CONSTRAINT FK_comments FOREIGN KEY (eventid) REFERENCES events(id);
 -- ALTER TABLE users ADD CONSTRAINT FK_users FOREIGN KEY (eventid) REFERENCES events(id);
 -- ALTER TABLE events ADD CONSTRAINT FK_events FOREIGN KEY (userid) REFERENCES users(id);

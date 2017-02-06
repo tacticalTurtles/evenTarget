@@ -4,10 +4,12 @@ import {handleEventClick} from '../redux/actions/appActions.js';
 
 var Bookmarks = ({events, handleEventClick}) => {
   return (
-  <div className="col-md-6 col-md-offset-3">
-    {events.map( (event) => {
+
+  <div className="event-list">
+    {events.map( (event, i) => {
       return (
         <EventEntry
+          key={i}
           event={event}
           handleEventClick={handleEventClick.bind(this)}
         />

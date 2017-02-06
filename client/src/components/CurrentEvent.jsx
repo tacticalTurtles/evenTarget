@@ -33,7 +33,7 @@ class CurrentEvent extends React.Component {
 
   componentDidUpdate() {
     this.getComments();
-    // this.getComfortLevel();
+    this.getComfortLevel();
   }
 
   getComments() {
@@ -98,6 +98,48 @@ class CurrentEvent extends React.Component {
   }
 
   setComfortLevel(e) {
+    var comfort = (this.state.comfort * this.state.comfortNumber + Number(e.target.value))/(this.state.comfortNumber + 1);
+      var options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          comfort: comfort,
+          comfortNumber: (this.state.comfortNumber + 1),
+          id: this.props.event.id
+        })
+      };
+      fetch('/postComfort', options)
+        .then((resp) => {
+          this.getComfortLevel();
+        });
+      e.preventDefault();
+    }
+
+    getComfortLevel() {
+      var options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: this.props.event.id
+        })
+      };
+      fetch('/getComfort', options)
+        .then((resp) => {
+          return resp.json()
+        }).then((resp) => {
+
+          this.setState({
+            comfort: resp.comfort,
+            comfortNumber: resp.comfortNumber
+          })
+        })
+    }
     var options = {
       method: 'POST',
       headers: {
