@@ -15,7 +15,9 @@ class CurrentEvent extends React.Component {
 
     this.state = {
       comment: '',
-      comments: []
+      comments: [],
+      comfort: 0,
+      comfortNumber: 0
     };
   }
 
@@ -30,6 +32,7 @@ class CurrentEvent extends React.Component {
 
   componentDidUpdate() {
     this.getComments();
+    this.getComfortLevel();
   }
 
   getComments() {
@@ -93,25 +96,49 @@ class CurrentEvent extends React.Component {
     console.log('posted');
   }
 
-
-
   setComfortLevel(e) {
-    var options = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        comfort: e.target.value
-      })
-    };
-    fetch('/postComfort', options)
-      .then((resp) => {
-        console.log('posted');
-      });
-    e.preventDefault();
-  }
+    var comfort = (this.state.comfort * this.state.comfortNumber + Number(e.target.value))/(this.state.comfortNumber + 1);
+      var options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          comfort: comfort,
+          comfortNumber: (this.state.comfortNumber + 1),
+          id: this.props.event.id
+        })
+      };
+      fetch('/postComfort', options)
+        .then((resp) => {
+          this.getComfortLevel();
+        });
+      e.preventDefault();
+    }
+
+    getComfortLevel() {
+      var options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: this.props.event.id
+        })
+      };
+      fetch('/getComfort', options)
+        .then((resp) => {
+          return resp.json()
+        }).then((resp) => {
+
+          this.setState({
+            comfort: resp.comfort,
+            comfortNumber: resp.comfortNumber
+          })
+        })
+    }
 
   render() {
     var desc = '';
@@ -134,6 +161,9 @@ class CurrentEvent extends React.Component {
           </div>
           <div className='event-entry-location'>
             {this.props.event.location}
+          </div>
+          <div className='comfortDisplay'>
+            comfort rating: {this.state.comfort}, number of ratings: {this.state.comfortNumber}
           </div>
           <div id='emotion'>
             <label> comfort level </label>
