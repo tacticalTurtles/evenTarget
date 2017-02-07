@@ -104,24 +104,24 @@ class CurrentEvent extends React.Component {
     if (this.props.event.id) {
       const {comfort, comfortNumber, comments} = this.props;
       return (
-        <div className="event-entry">
-          <div>
-            <img src={this.props.event.image} alt="IMG" />
+        <div className="event-entry media">
+          <div className="col-md-4">
+            <a href={this.props.event.url}><img src={this.props.event.image} alt="IMG" href={this.props.event.url} /></a>
           </div>
-          <div className= 'link'>
-            <a href={this.props.event.url}> link to website </a>
-          </div>
-          <div>
-            <div className="event-entry-title" >
-              {this.props.event.name}
+          <div className="col-md-8">
+              <div className="event-entry-title" >
+                {this.props.event.name}
+              </div>
+              <div className="event-entry-detail">
+                {desc}
+              </div>
+            <div className='event-entry-location'>
+              {this.props.event.location}
             </div>
-            <div className="event-entry-detail">
-              {desc}
-            </div>
+
+
           </div>
-          <div className='event-entry-location'>
-            {this.props.event.location}
-          </div>
+
           <div className='comfortDisplay'>
             comfort rating: {comfort}, number of ratings: {comfortNumber}
           </div>
@@ -139,10 +139,6 @@ class CurrentEvent extends React.Component {
               <label ><img src='data/5.png' /> </label>
           </div>
           <nav>
-            <div className='comments'>
-              <img src={this.props.event.image} />
-              {`: ${this.props.event.description}`}
-            </div>
           </nav>
           <ul className="list-group">
             {comments.map( (comment) => {

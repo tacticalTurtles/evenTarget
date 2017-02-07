@@ -12,7 +12,7 @@ class Nav extends React.Component {
   render() {
     const { showBookmarks, showHome } = this.props;
     const { isAuthenticated } = this.props.auth;
-    
+
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
         <li><a href="#" onClick={this.logout.bind(this)}><span className="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -28,14 +28,14 @@ class Nav extends React.Component {
 
     const userBookmarks = (
       <ul className="nav navbar-nav">
-        <li className="active"><Link to="/"><span className="glyphicon glyphicon-home"></span></Link></li>
+        <li className="active"><Link to="/"><span onClick={showHome} className="glyphicon glyphicon-home"></span></Link></li>
         <li><a href="#" onClick={showBookmarks}><span className="glyphicon glyphicon-bookmark"></span></a></li>
       </ul>
     );
 
     const guestBookmarks = (
       <ul className="nav navbar-nav">
-        <li className="active"><Link to="/"><span className="glyphicon glyphicon-home"></span></Link></li>
+        <li className="active"><Link to="/"><span onClick={showHome} className="glyphicon glyphicon-home"></span></Link></li>
       </ul>
     );
 
@@ -43,7 +43,7 @@ class Nav extends React.Component {
       <nav className="navbar">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">JAMBA</Link>
+            <Link to="/" onClick={showHome} className="navbar-brand">JAMBA</Link>
           </div>
             { isAuthenticated ? userBookmarks : guestBookmarks }
           <div className="collapse navbar-collapse">

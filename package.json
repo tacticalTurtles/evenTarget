@@ -1,9 +1,9 @@
 {
-  "name": "eventarget",
+  "name": "jamba",
   "version": "1.0.0",
   "description": "",
   "author": "FARJ",
-  "repository": "https://github.com/tacticalTurtles/evenTarget",
+  "repository": "https://github.com/tacticalTurtles/jamba",
   "license": "ISC",
   "scripts": {
     "start": "nodemon server/server.js",

@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS evenTarget;
+DROP DATABASE IF EXISTS jamba;
 
-CREATE DATABASE evenTarget;
+CREATE DATABASE jamba;
 
-USE evenTarget;
+USE jamba;
 
 DROP TABLE IF EXISTS events;
 
