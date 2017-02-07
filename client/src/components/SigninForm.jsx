@@ -2,8 +2,8 @@ import React from 'react';
 import TextFieldGroup from './common/TextFieldGroup.jsx';
 import validateInput from '../../../server/shared/validations/signin.js';
 import { connect } from 'react-redux';
-import { signin } from '../redux/actions/authActions.js'
-
+import { signin } from '../redux/actions/authActions.js';
+import { addFlashMessage } from '../redux/actions/flashMessagesActions.js';
 
 class SigninForm extends React.Component {
   constructor(props) {
@@ -33,9 +33,10 @@ class SigninForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.signin(this.state).then(
+      this.props.signin(this.state)
+      .then(
         (res) => this.context.router.push('/'),
-        (err) => this.setState({ errors: err.response.data.errors, isLoading: false }))
+        (err) => this.setState({ errors: err.response.data.errors, isLoading: false }));
     }
   }
 

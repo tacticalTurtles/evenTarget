@@ -1,17 +1,18 @@
 @import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
 
 body {
-  background: #f1f1f1;
+  background-color: #afbcdd;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .navbar {
   background: #fff;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
 .navbar img {
-  height: 40px;
-  width: 50px;
+  /*height: 40px;*/
+  /*width: 50px;*/
 }
 
 .search-bar {
@@ -39,7 +40,6 @@ body {
 
 .event-list {
   background: #fff;
-  padding: 8px;
   border: 0;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
@@ -47,6 +47,9 @@ body {
 .event-entry {
   font-size: 16px;
   padding: 8px;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
 
 .event-entry-title {

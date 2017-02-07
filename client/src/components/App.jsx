@@ -59,15 +59,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-md-3"></div>
-        <div className="col-md-6 entry-list">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 entry-list">
           <div>
             <Nav showBookmarks={this.showBookmarks.bind(this)}
   		  showHome={this.showHome.bind(this)}/>
+        <Search getEvents={this.getEvents.bind(this)} />
             <FlashMessagesList />
             {this.props.children}
           </div>
-          <Search getEvents={this.getEvents.bind(this)} />
           <EventList events={this.props.events}
 		  handleEventClick={this.handleEventClick.bind(this)}
 		  addToBookmarks={this.addToBookmarks.bind(this)}/>

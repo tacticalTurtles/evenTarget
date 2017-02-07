@@ -5,8 +5,8 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'eventarget',
-      user:     'jeffvilla',
+      database: 'jamba',
+      user:     'ryan',
       password: ''
     },
     pool: {

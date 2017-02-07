@@ -8,14 +8,12 @@ class Signup extends React.Component {
   render() {
     const {userSignupRequest, addFlashMessage, isUserExists } = this.props;
     return (
-      <div className="row">
-        <div className="col-md-4 col-md-offset-4">
-          <SignupForm 
+        <div className="col-md-12 event-entry media">
+          <SignupForm
             isUserExists={isUserExists}
-            userSignupRequest={userSignupRequest} 
+            userSignupRequest={userSignupRequest}
             addFlashMessage={addFlashMessage}/>
         </div>
-      </div>
     )
   }
 }

@@ -39,13 +39,14 @@ class Search extends React.Component {
             className="form-control"
             type="text"
             value={this.state.searchValue}
-            placeholder="find your target"
+            placeholder="search..."
             onChange={this.handleInputChange.bind(this)}
           />
           <button
             type="button"
+            className="btn btn-default"
             onClick={this.handleOnClick.bind(this)}
-            > search 
+            > SEARCH
             </button>
         </form>
       </div>
@@ -54,4 +55,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-
