@@ -16,6 +16,7 @@
 ## Summary ##
  > User can search for events, restaurants, and activities then be able to bookmark, comment, and rate them.
 
+![alt tag](./jamba.png)
 ## Problem ##
  > There is no centralized place to find local events.
 
